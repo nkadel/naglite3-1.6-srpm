@@ -1,0 +1,26 @@
+diff --git a/config.php.example b/config.php.example
+index 2ccfbe1..cfaebb6 100644
+--- a/config.php.example
++++ b/config.php.example
+@@ -8,7 +8,7 @@
+  **/
+ 
+ // Set file path to your nagios status log
+-// $statusFile = '/var/cache/nagios3/status.dat';
++// $statusFile = '/var/log/nagios/status.dat';
+ 
+ // Refresh time in seconds
+ // $refresh = 10; 
+diff --git a/index.php b/index.php
+index 8ec2a89..ee48e49 100755
+--- a/index.php
++++ b/index.php
+@@ -18,7 +18,7 @@
+  **/
+ 
+ // Set file path to your nagios status log
+-$statusFile = '/var/cache/nagios3/status.dat';
++$statusFile = '/var/log/nagios/status.dat';
+ 
+ // Default refresh time in seconds
+ $refresh = 10;

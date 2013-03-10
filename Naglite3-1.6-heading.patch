@@ -1,0 +1,75 @@
+# Activate optional header freature from master codeline.
+diff --git b/README.markdown a/README.markdown
+index 1cabe0f..c283232 100644
+--- b/README.markdown
++++ a/README.markdown
+@@ -1,7 +1,7 @@
+ Naglite3
+ ========
+ 
+-Nagios status monitor for a NOC or operations room.
++Nagios/Icinga status monitor for a NOC or operations room.
+ 
+ Inspired by Naglite (http://www.monitoringexchange.org/inventory/Utilities/AddOn-Projects/Frontends/NagLite) 
+ and Naglite2 (http://laur.ie/blog/2010/03/naglite2-finally-released/).
+@@ -17,6 +17,8 @@ Requirements
+ Naglite3 is only tested with Nagios3, but it should also work with Nagios2.
+ If you're running Nagios2, please let me know.
+ 
++[nkadel](https://github.com/nkadel) has reported, that it's also working with Icinga.
++
+ - Web server of your choice with PHP support
+ - PHP 5.2 or newer
+ - git
+diff --git b/config.php.example a/config.php.example
+index 2ccfbe1..6647f6b 100644
+--- b/config.php.example
++++ a/config.php.example
+@@ -21,3 +21,6 @@
+ // Enable fortune output
+ // $enableFortune = false;
+ // $fortunePath = "/usr/games/fortune";
++
++// Uncomment to show custom heading
++// $nagliteHeading = '<Your Custom Heading>';
+diff --git b/default.css a/default.css
+index aecb37c..40c3961 100644
+--- b/default.css
++++ a/default.css
+@@ -34,6 +34,12 @@ th, td.hostname { background-color: #d3d3d3; }
+     text-align: left;
+ }
+ 
++h1 {
++    text-align: center;
++    font-weight: bold;
++    color: #ffffff;
++}
++
+ h2.title {
+     text-align: left;
+     font-weight: bold;
+diff --git b/index.php a/index.php
+index 8ec2a89..b56f853 100755
+--- b/index.php
++++ a/index.php
+@@ -31,6 +31,9 @@ $statusFileTimeout = 60;
+ $enableFortune = false;
+ $fortunePath = "/usr/games/fortune";
+ 
++// Uncomment to show custom heading
++//$nagliteHeading = '<Your Custom Heading>';
++
+ /* 
+  * Nothing to change below
+  */
+@@ -292,6 +295,9 @@ if (is_readable("custom.css")) {
+ echo "</head>\n";
+ echo "<body>\n";
+ echo '<div id="content">';
++if($nagliteHeading) {
++    echo '<h1>'.$nagliteHeading.'</h1>';
++}
+ 
+ sectionHeader('hosts', $counter);
+ 
