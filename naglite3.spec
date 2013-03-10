@@ -62,3 +62,4 @@ Nagios or Icinga status monitor for a NOC or operations room.
 * Sun Mar 10 2013 <nkadel@gmail.com>
 - Create first naglite3 RPM.
 - Patch v1.6 tag to use optional headers from master.
+- Add notes on Nagios RHEL compatible configurations.
