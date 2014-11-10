@@ -4,7 +4,7 @@
 Name:      naglite3
 Summary:   naglite3 - Nagios status monitor for a NOC or operations room.
 Version:   1.6
-Release:   0.1
+Release:   0.2
 Vendor:    Erick Calder <ecalder@cpan.org>
 Packager:  Nico Kadel-Garcia <nkadel@gmail.com>
 License:   GPLv2
@@ -42,9 +42,9 @@ Nagios or Icinga status monitor for a NOC or operations room.
 %{__mkdir_p} %{buildroot}%{_var}/www/naglite3/
 %{__install} -m0664 * %{buildroot}%{_var}/www/naglite3/.
 
-%{__install} -D -m0664 -Dp %{SOURCE1} %{buildroot}%{_defaultdocdir}/%{name}-%{version}/README.fedora
+%{__install} -D -m0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/httpd/conf.d/naglite3.conf
 
-%{__install} -D -m0664 %{SOURCE2} %{buildroot}%{_sysconfdir}/httpd/conf.d/naglite3.conf
+%{__install} -D -m0664 -Dp %{SOURCE2} %{buildroot}%{_defaultdocdir}/%{name}-%{version}/README.fedora
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -54,12 +54,15 @@ Nagios or Icinga status monitor for a NOC or operations room.
 %dir %{_var}/www/naglite3
 %{_var}/www/naglite3/*
 # config.php is created locally by installer
-%ghost %{_var}/www/naglite3/config.php
+%ghost %attr(0644,root,root) %{_var}/www/naglite3/config.php
 %config(noreplace) %{_sysconfdir}/httpd/conf.d/naglite3.conf
 %doc %{_defaultdocdir}/%{name}-%{version}/README.fedora
 
 %changelog
-* Sun Mar 10 2013 <nkadel@gmail.com>
+* Mon Nov 10 2014 <nkadel@gmail.com> - 1.6-0.2
+- Swap README.md and naglite3.conf source files correctly
+
+* Sun Mar 10 2013 <nkadel@gmail.com> - 1.6-0.1
 - Create first naglite3 RPM.
 - Patch v1.6 tag to use optional headers from master.
 - Add notes on Nagios RHEL compatible configurations.
